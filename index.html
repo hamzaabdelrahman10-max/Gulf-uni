@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI X-Ray Diagnostics | Healthcare Revolution</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#home" class="logo">
+            <i class="fas fa-brain"></i>
+            <span>AI X-Ray Diagnostics</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#analyzer" class="nav-link">X-Ray Analyzer</a></li>
+            <li><a href="#about" class="nav-link">Project Overview</a></li>
+            <li><a href="#comparison" class="nav-link">AI vs Human</a></li>
+            <li><a href="#ethics" class="nav-link">Ethics & Security</a></li>
+        </ul>
+        <button class="mobile-toggle" id="mobileToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1>AI-Powered <span class="gradient-text">X-Ray Analysis</span> & First Aid</h1>
+            <p>Upload X-ray images — our trained AI detects fractures and provides instant first aid guidance. Early detection = faster, safer care.</p>
+            <div class="hero-buttons">
+                <a href="#analyzer" class="btn primary-btn">Try the Analyzer</a>
+                <a href="#about" class="btn secondary-btn">Learn More</a>
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <h3>3</h3>
+                    <p>Injury Types Trained</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Secured</h3>
+                    <p>All Data Local</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Instant</h3>
+                    <p>Results On-Screen</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="circle-glow"></div>
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop" alt="AI Medical Technology" class="hero-img">
+        </div>
+    </div>
+</section>
+
+<!-- AI X-Ray Analyzer Section -->
+<section id="analyzer" class="section analyzer-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>AI X-Ray Injury Analyzer</h2>
+            <p class="subtitle">Upload an X-ray — our trained model identifies the injury and gives recovery guidance</p>
+        </div>
+
+        <div class="analyzer-grid">
+            <!-- Upload Card -->
+            <div class="card upload-card">
+                <h3><i class="fas fa-upload"></i> Upload X-Ray Image</h3>
+                <div class="drop-zone" id="dropZone">
+                    <i class="fas fa-cloud-upload-alt drop-icon"></i>
+                    <p>Drag & drop your X-ray here<br>or click to browse</p>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                </div>
+                <div class="preview-container" id="previewContainer" style="display: none;">
+                    <img id="previewImg" alt="Uploaded X-Ray">
+                    <button class="clear-btn" id="clearBtn"><i class="fas fa-times"></i> Clear</button>
+                </div>
+                <button class="analyze-btn" id="analyzeBtn" disabled>
+                    <i class="fas fa-microscope"></i> Analyze with AI
+                </button>
+            </div>
+
+            <!-- Results Card -->
+            <div class="card results-card">
+                <h3><i class="fas fa-stethoscope"></i> AI Diagnosis & Recovery Plan</h3>
+                
+                <div id="resultsPlaceholder">
+                    <span class="badge scanning">Scanning...</span>
+                    <h4>Matching against trained cases...</h4>
+                    <p>Upload an image above to begin analysis</p>
+                </div>
+
+                <div id="resultsContent" style="display: none;">
+                    <span id="diagnosisBadge" class="badge">Match Found</span>
+                    <h3 id="injuryTitle">Injury Name</h3>
+                    <p id="confidenceText">Confidence — Description</p>
+
+                    <div class="do-section section-block">
+                        <h4>✅ Do — To Recover Faster</h4>
+                        <ul id="doSteps"></ul>
+                    </div>
+
+                    <div class="dont-section section-block">
+                        <h4>❌ Don't — Avoid These</h4>
+                        <ul id="dontSteps"></ul>
+                    </div>
+
+                    <div class="extra-tips section-block">
+                        <h4>💡 Extra Recovery Tips</h4>
+                        <p id="extraTips"></p>
+                    </div>
+
+                    <div class="hidden-tips section-block">
+                        <h4>🔍 What Doctors Don't Always Say</h4>
+                        <ul id="hiddenTips"></ul>
+                    </div>
+
+                    <div class="disclaimer">
+                        <strong>⚠️ Medical Disclaimer:</strong> This is a demonstration tool. Always consult a qualified 
+                        healthcare professional for actual diagnosis and treatment. In UAE emergencies, call 998.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Training Dataset -->
+        <div class="dataset-info">
+            <h4><i class="fas fa-flag"></i> AI Training Dataset — Built for UAE Healthcare</h4>
+            <p>Model trained on real injury cases to support faster first aid guidance across the UAE — from Ajman to Abu Dhabi, Dubai, and all Northern Emirates.</p>
+            <div class="dataset-grid">
+                <div class="dataset-item clickable-card" data-case="case1">
+                    <span class="dataset-label">Case 1</span>
+                    <h5>Hand: 5th Metacarpal Fracture</h5>
+                    <p>Common injury — fast recognition helps reduce complications</p>
+                </div>
+                <div class="dataset-item clickable-card" data-case="case2">
+                    <span class="dataset-label">Case 2</span>
+                    <h5>Leg: Comminuted Tibia/Fibula Fracture</h5>
+                    <p>Major trauma — instant guidance supports pre-hospital care</p>
+                </div>
+                <div class="dataset-item clickable-card" data-case="case3">
+                    <span class="dataset-label">Case 3</span>
+                    <h5>Hand: Thumb & Finger Dislocation/Fracture</h5>
+                    <p>Everyday injury — correct first aid preserves mobility</p>
+                </div>
+            </div>
+            <p class="note-text">
+                <i class="fas fa-info-circle"></i> Designed to complement UAE health services — early guidance until professional care is available. Always consult licensed medical practitioners.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Project Overview -->
+<section id="about" class="section alt-bg">
+    <div class="container">
+        <div class="section-header">
+            <h2>Project Overview</h2>
+            <p class="subtitle">Investigating how AI transforms medical diagnosis through advanced image analysis</p>
+        </div>
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-microscope"></i></div>
+                <h3>Our Focus</h3>
+                <p>This project explores how Artificial Intelligence analyzes medical images — including X-rays, CT scans, and MRIs — to identify early signs of disease that may escape human observation.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                <h3>Why Early Detection Matters</h3>
+                <p>Detecting conditions at their earliest stages dramatically improves treatment outcomes, reduces complications, and lowers global mortality rates.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                <h3>Comprehensive Analysis</h3>
+                <p>We compare AI accuracy against human diagnosis, examine ethical frameworks, and address cybersecurity for patient data protection.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI vs Human Comparison -->
+<section id="comparison" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>AI Analysis vs Human Observation</h2>
+            <p class="subtitle">How do they compare in accuracy, speed, and consistency?</p>
+        </div>
+        <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Human Diagnosis</th>
+                        <th>AI-Powered Diagnosis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Speed of Analysis</td>
+                        <td>Minutes to hours</td>
+                        <td>Seconds <i class="fas fa-bolt highlight"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Consistency</td>
+                        <td>Affected by fatigue, stress</td>
+                        <td>100% consistent performance</td>
+                    </tr>
+                    <tr>
+                        <td>Detection Accuracy</td>
+                        <td>High but variable</td>
+                        <td>Up to 98% for specific conditions</td>
+                    </tr>
+                    <tr>
+                        <td>Fine Detail Recognition</td>
+                        <td>Excellent contextual judgment</td>
+                        <td>Superior at subtle patterns</td>
+                    </tr>
+                    <tr>
+                        <td>Emotional & Holistic Care</td>
+                        <td>Strong advantage</td>
+                        <td>Supportive tool only</td>
+                    </tr>
+                    <tr>
+                        <td>Continuous Learning</td>
+                        <td>Through experience & training</td>
+                        <td>Instantly scalable across global data</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Ethics & Security -->
+<section id="ethics" class="section alt-bg">
+    <div class="container">
+        <div class="section-header">
+            <h2>Ethics, Advantages & Cybersecurity</h2>
+            <p class="subtitle">Responsible innovation in patient care</p>
+        </div>
+        <div class="three-column">
+            <div class="feature-card">
+                <h3><i class="fas fa-plus-circle green"></i> Advantages</h3>
+                <ul>
+                    <li>Earlier fracture detection & intervention</li>
+                    <li>Instant first aid guidance anywhere</li>
+                    <li>Reduced workload for medical professionals</li>
+                    <li>Access to diagnostics in underserved regions</li>
+                    <li>Support tool — doctors remain central</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3><i class="fas fa-exclamation-triangle yellow"></i> Limitations & Ethics</h3>
+                <ul>
+                    <li>Demo model — not for real medical use</li>
+                    <li>Limited training dataset (3 cases)</li>
+                    <li>Not a substitute for professional care</li>
+                    <li>Need transparency in AI decisions</li>
+                    <li>Requirement for continuous validation</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3><i class="fas fa-shield-alt blue"></i> Cybersecurity</h3>
+                <ul>
+                    <li>All processing happens locally in browser</li>
+                    <li>Images never leave your device</li>
+                    <li>No cloud API — maximum privacy</li>
+                    <li>Compliant with data protection principles</li>
+                    <li>Protected data = trusted AI healthcare</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>AI X-Ray Diagnostics</h4>
+                <p>A research project exploring AI in medical imaging — trained on real injury cases.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#analyzer">X-Ray Analyzer</a>
+                <a href="#about">Project Overview</a>
+                <a href="#ethics">Ethics & Security</a>
+            </div>
+            <div class="footer-col">
+                <h4>Project Focus</h4>
+                <a href="#">Fracture Detection</a>
+                <a href="#">First Aid Guidance</a>
+                <a href="#">Local Data Security</a>
+                <a href="#">Global Healthcare</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AI in Healthcare Project | For demonstration purposes only — not medical advice.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
