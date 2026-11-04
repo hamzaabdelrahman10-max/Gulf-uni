@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Upload History — MedGuard AI</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: #f8fafc; min-height: 100vh; padding: 40px 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .back-btn { display:inline-flex; align-items:center; gap:8px; background:#2563eb; color:white; padding:12px 24px; border-radius:10px; text-decoration:none; font-weight:600; margin-bottom:30px; }
+    .back-btn:hover { background:#1d4ed8; }
+    .header { text-align:center; margin-bottom:40px; }
+    .header h1 { font-size:32px; color:#0f172a; margin-bottom:10px; }
+    .header p { color:#64748b; }
+    .photos-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:24px; }
+    .photo-card { background:white; border-radius:16px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+    .photo-img { width:100%; height:220px; object-fit:cover; }
+    .photo-info { padding:20px; }
+    .photo-name { font-weight:700; font-size:16px; color:#0f172a; margin-bottom:6px; }
+    .photo-time { font-size:13px; color:#94a3b8; margin-bottom:10px; }
+    .photo-desc { font-size:14px; color:#475569; margin-bottom:12px; line-height:1.5; }
+    .photo-conf { display:inline-block; background:#dbeafe; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:13px; }
+    .empty-state { text-align:center; padding:80px 20px; }
+    .empty-state i { font-size:60px; color:#cbd5e1; margin-bottom:20px; }
+    .empty-state h2 { color:#64748b; margin-bottom:10px; }
+    .empty-state p { color:#94a3b8; }
+    .clear-btn { display:block; margin:40px auto 0; background:#ef4444; color:white; border:none; padding:12px 24px; border-radius:10px; font-weight:600; cursor:pointer; }
+    .clear-btn:hover { background:#dc2626; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Analyzer</a>
+    <div class="header">
+        <h1><i class="fas fa-folder-open"></i> Patient Upload History</h1>
+        <p>All X-rays uploaded and saved locally on your device</p>
+    </div>
+    <div id="photosContainer"></div>
+    <button id="clearAllBtn" class="clear-btn"><i class="fas fa-trash-alt"></i> Clear All History</button>
+</div>
+
+<script>
+const HISTORY_KEY = 'ai_xray_analysis_history';
+
+function loadAllPhotos() {
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    const container = document.getElementById('photosContainer');
+
+    if (history.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <h2>No uploads yet</h2>
+                <p>Upload an X-ray on the main page and it will appear here</p>
+            </div>`;
+        return;
+    }
+
+    container.innerHTML = '<div class="photos-grid">';
+    history.forEach(entry => {
+        container.innerHTML += `
+            <div class="photo-card">
+                <img src="${entry.imageData}" class="photo-img" alt="Uploaded X-Ray">
+                <div class="photo-info">
+                    <h3 class="photo-name">${entry.result.name}</h3>
+                    <p class="photo-time"><i class="fas fa-clock"></i> ${entry.timestamp}</p>
+                    <p class="photo-desc">${entry.result.description}</p>
+                    <span class="photo-conf">${entry.result.confidence}</span>
+                </div>
+            </div>`;
+    });
+    container.innerHTML += '</div>';
+}
+
+document.getElementById('clearAllBtn').addEventListener('click', () => {
+    if (confirm('Delete ALL history? This cannot be undone.')) {
+        localStorage.removeItem(HISTORY_KEY);
+        loadAllPhotos();
+    }
+});
+
+loadAllPhotos();
+</script>
+</body>
+</html>
 
